@@ -6,8 +6,9 @@
 // Declaração de variáveis com os atributos das cartas
 // Valores inciais atribuidos para inicializacao na memoria evitando "lixo" de outros programas
 char LetraEstado1 = 'A', LetraEstado2 = 'A', CódigodaCarta1[4] = "0", CódigodaCarta2[4] = "0", NomedaCidade1[50] = "0", NomedaCidade2[50] = "0";
-int População1 = 0, População2 = 0, NúmeroPontosTurísticos1 = 0, NúmeroPontosTurísticos2 = 0;
-float ÁreadaCidade1 = 0, ÁreadaCidade2 = 0, PIB1 = 0, PIB2 = 0, DensidadePopulacional1 = 0, PIBperCapita1 = 0, DensidadePopulacional2 = 0, PIBperCapita2 = 0;
+unsigned long int População1 = 0, População2 = 0;
+int NúmeroPontosTurísticos1 = 0, NúmeroPontosTurísticos2 = 0, ComparaPopulacao = 0, ComparaÁrea = 0, ComparaPIB = 0, ComparaNúmeroPontosTurísticos = 0, ComparaPIBperCapita = 0, ComparaDensidadePopulacional = 0;
+float ÁreadaCidade1 = 0, ÁreadaCidade2 = 0, PIB1 = 0, PIB2 = 0, DensidadePopulacional1 = 0, PIBperCapita1 = 0, DensidadePopulacional2 = 0, PIBperCapita2 = 0, SuperPoder1 = 0, SuperPoder2 = 0;
 
 // Carta 1: Leitura de dados do usuario
 void EntradaDados() {
@@ -69,6 +70,9 @@ void RealizarCalculos(){
     DensidadePopulacional2 = (float) População2 / ÁreadaCidade2;
     DensidadePopulacional2 = (float) População2 / ÁreadaCidade2;
     PIBperCapita2 = PIB2 / (float) População2;
+
+    SuperPoder1 = População1 + ÁreadaCidade1 + PIB1 + NúmeroPontosTurísticos1 + PIBperCapita1 + (1 / DensidadePopulacional1);
+    SuperPoder2 = População2 + ÁreadaCidade2 + PIB2 + NúmeroPontosTurísticos2 + PIBperCapita2 + (1 / DensidadePopulacional2);
     }
 
 void ExibirResultados(){
@@ -82,8 +86,9 @@ void ExibirResultados(){
     printf("Área: %.2f km²\n", ÁreadaCidade1);
     printf("PIB: %.2f bilhões de reais\n", PIB1);
     printf("Número de pontos turísticos: %d\n", NúmeroPontosTurísticos1);
-    printf("Densidade Populacional: %f hab/km²\n", DensidadePopulacional1);
-    printf("PIB per Capita: %f reais\n", PIBperCapita1);
+    printf("Densidade Populacional: %.2f hab/km²\n", DensidadePopulacional1);
+    printf("PIB per Capita: %.2f reais\n", PIBperCapita1);
+    printf("Super Poder: %.2f\n", SuperPoder1);
 
     //Exibição de dados da carta 2
     printf("\n-----> Dados da Carta 2\n");
@@ -97,11 +102,24 @@ void ExibirResultados(){
     printf("Número de pontos turísticos: %d\n", NúmeroPontosTurísticos2);
     printf("Densidade Populacional: %.2f hab/km²\n", DensidadePopulacional2);
     printf("PIB per Capita: %.2f reais\n", PIBperCapita2);
+    printf("Super Poder: %f\n", SuperPoder2);
     }
+
+void ExibirComparacoes(){
+    printf("\n-----> Comparações de Cartas\n");
+    printf("População: Carta 1 venceu (%d)\n", População1 > População2);
+    printf("Área: Carta 1 venceu (%d)\n", ÁreadaCidade1 > ÁreadaCidade2);
+    printf("PIB: Carta 1 venceu (%d)\n", PIB1 > PIB2);
+    printf("Pontos Turísticos: Carta 1 venceu (%d)\n", NúmeroPontosTurísticos1 > NúmeroPontosTurísticos2);
+    printf("Densidade Populacional: Carta 1 venceu (%d)\n", DensidadePopulacional1 > DensidadePopulacional2);
+    printf("PIB per Capita: Carta 1 venceu (%d)\n", PIBperCapita1 > PIBperCapita2);
+    printf("Super Poder: Carta 1 venceu (%d)\n", SuperPoder1 > SuperPoder2);
+}
 
 int main(){
     EntradaDados();
     RealizarCalculos();
     ExibirResultados();
+    ExibirComparacoes();
     return 0;
     }
